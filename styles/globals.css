@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
 /*
   Josh's Custom CSS Reset
   https://www.joshwcomeau.com/css/custom-css-reset/
@@ -51,4 +53,27 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+/*
+End of CSS Reset
+*/
+
+
+@font-face {
+  font-family: 'NEXTART';
+  src: url('../assets/NEXT\ ART_SemiBold.otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'NEXTART';
+  src: url('../assets/NEXT\ ART_Regular.otf');
+  font-weight: normal;
+}
+:root {
+  --dark: #1B262C;
+  --darker: #0F4C75;
+  --light: #3282B8;
+  --lighter: #BBE1FA;
 }
