@@ -62,13 +62,13 @@ End of CSS Reset
 
 @font-face {
   font-family: 'NEXTART';
-  src: url('../assets/fonts/NEXT\ ART_SemiBold.otf');
+  src: url('/fonts/NEXT\ ART_SemiBold.otf');
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'NEXTART';
-  src: url('../assets/fonts/NEXT\ ART_Regular.otf');
+  src: url('/fonts/NEXT\ ART_Regular.otf');
   font-weight: normal;
 }
 :root {
