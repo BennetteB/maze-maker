@@ -5,12 +5,12 @@ import Image from "next/image";
 import styles from '../styles/Feature.module.css';
 
 function Feature({image, altText, children} 
-  : {image : StaticImageData; altText : string; children : React.ReactNode}) {
+  : {image : string; altText : string; children : React.ReactNode}) {
   return (
     <div className={classNames(styles.featureDiv)}>
       <h1 className={classNames(styles.featureText)}>{children}</h1>
       <div className={classNames(styles.imageDiv)}>
-        <Image src={image} alt={altText} className={classNames(styles.image)} objectFit="contain" />
+        <Image src={image} alt={altText} className={classNames(styles.image)} objectFit="contain" width={600} height={600}/>
       </div>
     </div>
   )
