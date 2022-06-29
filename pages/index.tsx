@@ -4,12 +4,6 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Logo from '../assets/MazeMakerLogo.png';
 import Feature from '../components/Feature';
-import AutoGenMazeImage from '/public/images/featureImages/AutoGenMazeBold_ColdBlue.png';
-import WallSize from '/public/images/featureImages/ChangeWallSize_ColdBlue.png';
-import ExportMaze from '/public/images/featureImages/Export_ColdBlue.png';
-import ImageInsideMaze from '/public/images/featureImages/ImageInsideMaze_ColdBlue.png';
-import Solvability from '/public/images/featureImages/SolvabilityOptimalSolution_ColdBlue.png';
-import WaterMarkImage from '/public/images/featureImages/Watermark_ColdBlue.png';
 
 
 const Home: NextPage = () => {
