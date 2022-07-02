@@ -1,3 +1,4 @@
+import MazeCanvas from "../components/MazeCanvas";
 import { default as cn } from "classnames";
 import { NextPage } from "next";
 import styles from '../styles/Editor.module.css';
@@ -12,6 +13,7 @@ import DataThresholdingIcon from '@mui/icons-material/DataThresholding';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import TagIcon from '@mui/icons-material/Tag';
+import CropSquareIcon from '@mui/icons-material/CropSquare';
 
 const Editor : NextPage = () => {
   return (
@@ -44,7 +46,7 @@ const Editor : NextPage = () => {
         <div className={cn(styles.editMenuItem)}></div>
       </div>
       <div className={cn(styles.editPanel)}>
-
+        <MazeCanvas />
       </div>
       <div className={cn(styles.utilBar)}>
         <button className={cn(styles.utilButton)}><EditIcon className={cn(styles.utilIcon)} fontSize="inherit"/></button>
@@ -53,6 +55,7 @@ const Editor : NextPage = () => {
         <button className={cn(styles.utilButton)}><AddPhotoAlternateIcon className={cn(styles.utilIcon)} fontSize="inherit"/></button>
         <button className={cn(styles.utilButton)}><ImageNotSupportedIcon className={cn(styles.utilIcon)} fontSize="inherit"/></button>
         <button className={cn(styles.utilButton)}><TagIcon className={cn(styles.utilIcon)} fontSize="inherit"/></button>
+        <button className={cn(styles.utilButton)}><CropSquareIcon className={cn(styles.utilIcon)} fontSize="inherit"/></button>
       </div>
     </div>
   )

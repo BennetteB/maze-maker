@@ -1,0 +1,14 @@
+.canvasDiv {
+  z-index: -1;
+  background-color: green;
+  width: fit-content;
+  height: fit-content;
+}
+
+.canvas {
+  background-color: white;
+  /* width: 10rem;
+  height: 10rem; */
+  overflow: scroll;
+
+}
