@@ -3,7 +3,7 @@
   width: 100vw;
   display: grid;
   grid-template-rows: 10% 80% 10%;
-  grid-template-areas: 
+  grid-template-areas:
     "topBar"
     "editPanel"
     "utilBar";
@@ -49,6 +49,7 @@
 }
 
 .menuBar {
+  display: none;
   z-index: 2;
 }
 
@@ -79,7 +80,7 @@
 }
 
 
-.menuBarItem > .menuBarButton:focus + .dropDown {
+.menuBarItem>.menuBarButton:focus+.dropDown {
   display: flex;
 }
 
@@ -100,9 +101,9 @@
   .editorDiv {
     grid-template-rows: 3% auto;
     grid-template-columns: 4rem auto;
-    grid-template-areas: 
-    "menuBar menuBar"
-    "utilBar editPanel";
+    grid-template-areas:
+      "menuBar menuBar"
+      "utilBar editPanel";
   }
 
   .topBar {
@@ -124,10 +125,6 @@
     background-color: var(--dark);
     display: flex;
     flex-direction: row;
-  }
-
-  .menuBar {
-    display: flex;
   }
 
 }
