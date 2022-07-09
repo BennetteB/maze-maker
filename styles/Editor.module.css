@@ -20,6 +20,7 @@
 .editPanel {
   background-color: var(--darker);
   grid-area: editPanel;
+  overflow: scroll;
 }
 
 .utilBar {
