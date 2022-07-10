@@ -1,7 +1,7 @@
 import { default as cn } from 'classnames';
 import styles from '../styles/MazeCanvas.module.css';
 import createPanZoom, { PanZoom } from 'panzoom';
-import React, { LegacyRef, useEffect, useRef } from 'react';
+import React, { LegacyRef, useEffect, useRef, useState } from 'react';
 import { execFileSync } from 'child_process';
 import { isGeneratorObject } from 'util/types';
 import GenerateMaze, { Cell, getMazeDimensions } from '../utils/Maze';
@@ -12,7 +12,6 @@ import { useStepperContext } from '@mui/material';
 function MazeCanvas({ options }: { options: { editable: boolean } }): JSX.Element {
   const canvasDivRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  let ctx: CanvasRenderingContext2D;
 
   const wallWidth = 15;
   const cellWidth = 90;
@@ -20,39 +19,47 @@ function MazeCanvas({ options }: { options: { editable: boolean } }): JSX.Elemen
   const MazeWidth = 100;
   const MazeHeight = 100;
 
-  let mazeData: Cell[][];
+  const [mazeData, setMazeData] = useState<Cell[][] | null>(null);
 
-  let panzoomCanvas: PanZoom;
+  const [panzoomCanvas, setPanzoomCanvas] = useState<PanZoom | null>(null);
+
+  const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
   const { Width: CanvasWidth, Height: CanvasHeight } = getMazeDimensions(MazeWidth, MazeHeight, cellWidth, wallWidth);
 
   useEffect(() => {
-    panzoomCanvas = createPanZoom(canvasDivRef.current as HTMLElement, {
+    console.log(canvasDivRef.current);
+    setCtx(canvasRef.current!.getContext('2d'));
+    setPanzoomCanvas(createPanZoom(canvasDivRef.current as HTMLElement, {
       smoothScroll: false,
-    });
-    ctx = (canvasRef.current as HTMLCanvasElement).getContext('2d') as CanvasRenderingContext2D;
-    ctx.clearRect(0, 0, canvasRef.current!.width, canvasRef.current!.height)
-    ctx!.fillStyle = "red";
-    mazeData = GenerateMaze(MazeWidth, MazeHeight, {
-      directionRects: {
-        cellWidth: cellWidth,
-        wallWidth: wallWidth,
-        draw: ctx,
-      }
-    })
-    console.log(CanvasWidth, CanvasHeight);
+    }));
   }, [])
+
+  useEffect(() => {
+    if (ctx !== null) {
+      ctx!.clearRect(0, 0, canvasRef.current!.width, canvasRef.current!.height);
+      ctx!.fillStyle = "red";
+
+      setMazeData(GenerateMaze(MazeWidth, MazeHeight, {
+        directionRects: {
+          cellWidth: cellWidth,
+          wallWidth: wallWidth,
+          draw: ctx!,
+        }
+      }))
+    }
+
+  }, [ctx])
 
 
 
   function CanvasClick(e: React.MouseEvent<HTMLElement>) {
     if (!options.editable) return;
     const boundRect = (canvasRef.current as HTMLCanvasElement).getBoundingClientRect();
-    const canvasX = (e.clientX - boundRect.x) / panzoomCanvas.getTransform().scale;
-    const canvasY = (e.clientY - boundRect.y) / panzoomCanvas.getTransform().scale;
-    // console.log(boundRect.x, boundRect.y);
+    const canvasX = (e.clientX - boundRect.x) / panzoomCanvas!.getTransform().scale;
+    const canvasY = (e.clientY - boundRect.y) / panzoomCanvas!.getTransform().scale;
     console.log(canvasX, canvasY);
-    mazeData = ChangeWall(mazeData, canvasX, canvasY, ctx);
+    setMazeData(prev => ChangeWall(prev!, canvasX, canvasY, ctx!));
   }
   return (
     <div id='canvasDiv' className={cn(styles.canvasDiv)} ref={canvasDivRef as LegacyRef<HTMLDivElement>} >

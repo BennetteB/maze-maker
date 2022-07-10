@@ -14,12 +14,14 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import TagIcon from '@mui/icons-material/Tag';
 import CropSquareIcon from '@mui/icons-material/CropSquare';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Editor: NextPage = () => {
+
   const [options, setOptions] = useState({
     editable: false,
   })
+
   return (
     <div className={cn(styles.editorDiv)}>
       <div className={cn(styles.topBar)}>
@@ -53,7 +55,9 @@ const Editor: NextPage = () => {
         <MazeCanvas options={options} />
       </div>
       <div className={cn(styles.utilBar)}>
-        <button className={cn(styles.utilButton)}><EditIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
+        <button className={cn(styles.utilButton, options.editable ? styles['utilButton-selected'] : '')} onClick={() => {
+          setOptions(prev => ({ ...prev, editable: !prev.editable }))
+        }} title="Edit"><EditIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
         <button className={cn(styles.utilButton)}><CheckCircleOutlineIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
         <button className={cn(styles.utilButton)}><DataThresholdingIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
         <button className={cn(styles.utilButton)}><AddPhotoAlternateIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
@@ -61,7 +65,7 @@ const Editor: NextPage = () => {
         <button className={cn(styles.utilButton)}><TagIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
         <button className={cn(styles.utilButton)}><CropSquareIcon className={cn(styles.utilIcon)} fontSize="inherit" /></button>
       </div>
-    </div>
+    </div >
   )
 }
 

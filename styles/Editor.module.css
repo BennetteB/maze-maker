@@ -41,6 +41,10 @@
   border: none;
 }
 
+.utilButton-selected {
+  background-color: var(--light);
+}
+
 .utilButton:hover {
   background-color: var(--light);
 }
@@ -117,8 +121,7 @@
 
   .utilButton {
     width: 100%;
-    margin-top: 1rem;
-    padding-block: 0.6rem;
+    padding-block: 1.6rem;
   }
 
   .menuBar {
