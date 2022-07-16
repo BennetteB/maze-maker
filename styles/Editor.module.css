@@ -102,6 +102,160 @@
   background-color: var(--light);
 }
 
+.popup::before,
+.popup::after {
+  content: '';
+  height: 1.5rem;
+}
+
+.popupBackground {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  background-color: var(--dark);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  width: min(fit-content, 80%);
+  max-width: 30rem;
+}
+
+.solutionSettings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 10%;
+  height: 10%;
+  z-index: 2;
+  background-color: var(--dark);
+  width: 100%;
+  padding: 1vw;
+}
+
+.solutionBtn {
+  width: 7rem;
+  margin: 1vw;
+  box-sizing: content-box;
+  border: none;
+  background: none;
+  border: 0.3rem solid var(--darker);
+  border-radius: 0.4rem;
+  color: var(--lighter);
+  background-color: var(--dark);
+}
+
+.solutionBtnSelected {
+  width: 7rem;
+  margin: 1vw;
+  box-sizing: content-box;
+  border: none;
+  background: none;
+  border: 0.3rem solid var(--darker);
+  border-radius: 0.4rem;
+  color: var(--lighter);
+  background-color: var(--darker);
+}
+
+.solutionBtnState {
+  background-color: var(--lighter);
+}
+
+.mainBtn {
+  box-sizing: content-box;
+  width: 20rem;
+  height: fit-content;
+  /* margin-inline: 1rem; */
+  background: none;
+  border: none;
+  border: 0.3rem solid var(--light);
+  border-radius: 0.5rem;
+  margin-block: 1.0rem;
+  color: var(--lighter);
+  font-family: 'NEXTART', sans-serif;
+  font-size: 1.5rem;
+  font-style: bold;
+
+  transition-timing-function: ease-in;
+  transition-duration: 100ms;
+}
+
+.mainBtn:hover {
+  background-color: var(--light);
+}
+
+.inputDiv {
+  display: flex;
+  font-family: 'NEXTART', sans-serif;
+  color: var(--light);
+  margin-bottom: 1rem;
+}
+
+.inputDiv>label {
+  width: 11rem;
+  font-size: 1rem;
+}
+
+.inputDiv>input {
+  width: 5rem;
+}
+
+.inputDiv>.nameLabel {
+  width: 7rem;
+}
+
+.inputDiv>.nameInput {
+  width: 9rem;
+}
+
+.smallBtn {
+  justify-self: center;
+  align-self: center;
+  margin-inline: auto;
+  background: none;
+  border: none;
+  float: right;
+  width: 8rem;
+  height: 2.5rem;
+  border: 0.2rem solid var(--light);
+  border-radius: 0.5rem;
+  font-family: 'NEXTART', sans-serif;
+  color: var(--lighter);
+
+
+  transition-timing-function: ease-in;
+  transition-duration: 100ms;
+}
+
+.smallBtn:hover {
+  background-color: var(--light);
+
+}
+
+.confirmOptionsDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+
 @media (min-width: 900px) {
   .editorDiv {
     grid-template-rows: 3% auto;
@@ -130,5 +284,7 @@
     display: flex;
     flex-direction: row;
   }
+
+  .popup {}
 
 }

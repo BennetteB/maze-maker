@@ -21,7 +21,8 @@
 .image {
   display: flex;
   justify-content: center;
-  align-items: center;;
+  align-items: center;
+  ;
   width: 3rem;
   height: auto;
   margin-right: 0.5rem;
@@ -54,7 +55,7 @@
   padding-inline: 2.2rem;
 }
 
-.getStartedBtn {
+.mainBtn {
   box-sizing: content-box;
   margin-top: 1.5rem;
   width: 15rem;
@@ -73,8 +74,8 @@
   font-weight: bold;
 }
 
-.getStartedBtn:hover {
- background-color: var(--light);
+.mainBtn:hover {
+  background-color: var(--light);
 }
 
 .featureDiv {
@@ -83,6 +84,7 @@
   width: 100%;
   height: fit-content;
 }
+
 .featuresHeading {
   font-family: 'NEXTART', sans-serif;
   color: white;
@@ -103,4 +105,3 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-

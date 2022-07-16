@@ -37,7 +37,7 @@ interface StackCell extends Cell {
 }
 
 function GenerateMaze(width: number, height: number, opts?: {
-  algorithm?: "DFS",
+  algorithm?: "None" | "DFS",
   directionRects?: {
     cellWidth: number;
     wallWidth: number;
@@ -50,13 +50,14 @@ function GenerateMaze(width: number, height: number, opts?: {
 
   if (opts !== undefined) {
     if (opts.algorithm === undefined || opts.algorithm === "DFS") maze = GenerateDFS(width, height);
+    else if (opts.algorithm === "None") maze = createMaze(height, width, false);
     if (opts.directionRects !== undefined) {
       if (opts.directionRects.draw !== undefined) {
-        maze = getRects(maze, opts.directionRects!.cellWidth, opts.directionRects!.wallWidth, opts.directionRects!.scale);
-        drawRects(maze, opts.directionRects!.draw!);
+        maze = GetRects(maze, opts.directionRects!.cellWidth, opts.directionRects!.wallWidth, opts.directionRects!.scale) as StackCell[][];
+        DrawRects(maze, opts.directionRects!.draw!);
       }
       else {
-        maze = getRects(maze, opts.directionRects!.cellWidth, opts.directionRects!.wallWidth, opts.directionRects!.scale)
+        maze = GetRects(maze, opts.directionRects!.cellWidth, opts.directionRects!.wallWidth, opts.directionRects!.scale) as StackCell[][];
       }
     }
   }
@@ -127,44 +128,47 @@ function GenerateDFS(width: number, height: number) {
   return maze;
 }
 
-function getRects(matrix: StackCell[][], cellWidth: number, wallWidth: number, scale: number | undefined): StackCell[][] {
+export function GetRects(matrix: StackCell[][] | Cell[][], cellWidth: number, wallWidth: number, scale: number | undefined): StackCell[][] | Cell[][] {
+  console.log(wallWidth, cellWidth, "getRects");
   matrix.forEach((row, rowi) => {
     row.forEach((col, coli) => {
       if (scale !== undefined) {
         cellWidth = cellWidth * scale;
         wallWidth = wallWidth * scale;
       }
-      const x = coli * cellWidth;
-      const y = rowi * cellWidth;
 
       const totalWidth = cellWidth + wallWidth;
+
+      const x = coli * totalWidth;
+      const y = rowi * totalWidth;
+
       const cell = matrix[rowi][coli];
       matrix[rowi][coli] = {
+        ...cell,
         upRect: {
           x: x,
           y: y,
-          width: totalWidth,
+          width: totalWidth + wallWidth,
           height: wallWidth
         },
         downRect: {
           x: x,
-          y: y + cellWidth,
-          width: totalWidth,
+          y: y + totalWidth,
+          width: totalWidth + wallWidth,
           height: wallWidth
         },
         leftRect: {
           x: x,
           y: y,
           width: wallWidth,
-          height: totalWidth
+          height: totalWidth + wallWidth
         },
         rightRect: {
-          x: x + cellWidth,
+          x: x + totalWidth,
           y: y,
           width: wallWidth,
-          height: totalWidth
+          height: totalWidth + wallWidth
         },
-        ...cell
       }
     });
   })
@@ -172,17 +176,19 @@ function getRects(matrix: StackCell[][], cellWidth: number, wallWidth: number, s
   return matrix;
 }
 
-export function getMazeDimensions(MazeWidth: number, MazeHeight: number, cellWidth: number, wallWidth: number) {
-  return { Width: (MazeWidth * cellWidth) + wallWidth, Height: (MazeHeight * cellWidth) + wallWidth }
+export function GetMazeDimensions(MazeWidth: number, MazeHeight: number, cellWidth: number, wallWidth: number) {
+  const totalWidth = cellWidth + wallWidth;
+  return [(MazeWidth * totalWidth) + wallWidth, (MazeHeight * totalWidth) + wallWidth];
 }
 
-function drawRects(matrix: Cell[][], ctx: CanvasRenderingContext2D) {
+export function DrawRects(matrix: Cell[][], ctx: CanvasRenderingContext2D) {
   // x and y adjusted for edge wall
   matrix.forEach((row, rowi) => {
     row.forEach((col, coli) => {
       const cell = matrix[rowi][coli];
       if (cell.up) {
         ctx.fillRect(cell.upRect!.x, cell.upRect!.y, cell.upRect!.width, cell.upRect!.height);
+        console.log("drawn");
       }
       if (cell.down) {
         ctx.fillRect(cell.downRect!.x, cell.downRect!.y, cell.downRect!.width, cell.downRect!.height);
