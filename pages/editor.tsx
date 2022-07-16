@@ -89,7 +89,7 @@ const Editor: NextPage = () => {
             <form onSubmit={(e) => {
               e.preventDefault();
               setPageState(prev => { setPreviousState(prev); return "Editing" });
-              if (state === 'NewMaze') setOptions(tempOptions);
+              if (state === 'NewMaze') { setOptions(tempOptions); setSolutionOptions({ cell1: false, cell2: false }) }
               else if (state === 'MazeSettings') setOptions({ ...tempOptions, autogenMaze: false, keepMaze: true })
               setActiveMaze(true);
             }}>

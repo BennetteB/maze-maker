@@ -86,6 +86,7 @@ function MazeCanvas({ options, editable, solutionState, solutionConfirm, showSol
 
       }
       else if (options.autogenMaze) {
+        setSolutionWalls({});
         setMazeData(GenerateMaze(options.mazeWidth, options.mazeHeight, {
           directionRects: {
             cellWidth: options.cellWidth,
@@ -94,6 +95,7 @@ function MazeCanvas({ options, editable, solutionState, solutionConfirm, showSol
           }
         }))
       } else {
+        setSolutionWalls({});
         setMazeData(GenerateMaze(options.mazeWidth, options.mazeHeight, {
           algorithm: "None",
           directionRects: {
